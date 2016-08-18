@@ -25,3 +25,9 @@ github_username:  ilimei
 
 # Build settings
 markdown: kramdown
+
+#代码高亮
+highlight: true
+#SASS添加
+sass:
+  style: compressed
