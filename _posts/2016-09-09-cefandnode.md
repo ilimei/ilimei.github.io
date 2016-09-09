@@ -32,7 +32,7 @@ extern "C" {
 修改browser_message_loop.h文件 让BrowserMessageLoop覆盖父类的
 DoIdleWork方法
 
-```cpp
+```c++
 // Copyright (c) 2012 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that can
 // be found in the LICENSE file.
@@ -71,7 +71,7 @@ class CefBrowserMessageLoop : public base::MessageLoopForUI {
 
 browser_message_loop.cc文件后追加代码
 
-```c
+```c++
 OnIdleMessageLoop userOnIdleMessageLoop;
 void SetUserOnMessageIdleLoop(OnIdleMessageLoop proc) {
 	userOnIdleMessageLoop = proc;
