@@ -17,7 +17,7 @@ url: "http://yanglimei.com" # the base hostname & protocol for your site
 github_username:  ilimei
 
 # Build settings
-markdown: kramdown
+# markdown: kramdown
 
 #代码高亮
 highlight: true
