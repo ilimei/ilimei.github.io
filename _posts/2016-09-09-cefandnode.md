@@ -17,7 +17,7 @@ cef的事件循环是MessageLoop类和一些delegate,UI线程用有单独的Dele
 node-webkit中是新建了一个MessageLoop::Delegate子类 替换了原有的delegate
 那样改起来代码太多，所以我直接新建了一个函数类型,以及一个全局变量和函数
 
-```
+```c++
 typedef void(*OnIdleMessageLoop)();
 extern OnIdleMessageLoop userOnIdleMessageLoop;
 extern "C" {
@@ -32,7 +32,7 @@ extern "C" {
 修改browser_message_loop.h文件 让BrowserMessageLoop覆盖父类的
 DoIdleWork方法
 
-```
+```cpp
 // Copyright (c) 2012 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that can
 // be found in the LICENSE file.
@@ -71,7 +71,7 @@ class CefBrowserMessageLoop : public base::MessageLoopForUI {
 
 browser_message_loop.cc文件后追加代码
 
-```
+```c
 OnIdleMessageLoop userOnIdleMessageLoop;
 void SetUserOnMessageIdleLoop(OnIdleMessageLoop proc) {
 	userOnIdleMessageLoop = proc;
