@@ -81,7 +81,7 @@ Module._extensions['.json'] = function (module, filename) {
 //增加入口require方法
 //如果bool为真 表示从虚拟路径查找
 Module.require = function (request,bool) {
-    request=bool?request.replace("./", "./virualPath/"):request;
+    request=bool?request.replace(/^\.\//g, "./virualPath/"):request;
     return Module._load(request);
 }
 ```
@@ -89,6 +89,6 @@ Module.require = function (request,bool) {
 ## 修改完成
 
 加载虚拟路径下的js文件
-`NativeModule.require("module").require("./appjs/test");`
+`NativeModule.require("module").require("./appjs/test",true);`
 
 测试运行良好
