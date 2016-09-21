@@ -26,64 +26,69 @@ photoUrl:
 
 ```javascript
 	
-	//定义虚拟路径
-	const virualPath = process.cwd() + path.sep + "virualPath";
+//定义虚拟路径
+const virualPath = process.cwd() + path.sep + "virualPath";
 
-	_internalModuleStat=internalModuleStat;
+_internalModuleStat=internalModuleStat;
 
-	internalModuleStat = function (reqpath) {
-		var re = _internalModuleStat(path._makeLong(reqpath));
-		if (re < 0) {
-			var basePath = reqpath.replace(virualPath, "").replace(/\\/g, "/").replace(/^\//, "");
-			re = GetPakSourceType(basePath);
-		}
-		return re;
+internalModuleStat = function (reqpath) {
+	var re = _internalModuleStat(path._makeLong(reqpath));
+	if (re < 0) {
+		var basePath = reqpath.replace(virualPath, "").replace(/\\/g, "/").replace(/^\//, "");
+		re = GetPakSourceType(basePath);
 	}
+	return re;
+}
 
-	_internalModuleReadFile=internalModuleReadFile;
+_internalModuleReadFile=internalModuleReadFile;
 
-	internalModuleReadFile = function(reqpath){
-		if(reqpath.startsWith(virualPath)){
-			return getPakFile(reqpath);
-		}else{
-			return _internalModuleReadFile(reqpath);
-		}
+internalModuleReadFile = function(reqpath){
+	if(reqpath.startsWith(virualPath)){
+		return getPakFile(reqpath);
+	}else{
+		return _internalModuleReadFile(reqpath);
 	}
+}
 
-	// Native extension for .js
-	Module._extensions['.js'] = function (module, filename) {
-	    var content = "";
-	    if (filename.startsWith(virualPath)) {
-	        content = getPakFile(filename);
-	    } else {
-	        content = fs.readFileSync(filename, 'utf8');
-	    }
-	    module._compile(stripBOM(content), filename);
-	};
+// Native extension for .js
+Module._extensions['.js'] = function (module, filename) {
+    var content = "";
+    if (filename.startsWith(virualPath)) {
+        content = getPakFile(filename);
+    } else {
+        content = fs.readFileSync(filename, 'utf8');
+    }
+    module._compile(stripBOM(content), filename);
+};
 
 
-	// Native extension for .json
-	Module._extensions['.json'] = function (module, filename) {
-	    var content = "";
-	    if (filename.startsWith(virualPath)) {
-	        content = getPakFile(filename);
-	    } else {
-	        content = fs.readFileSync(filename, 'utf8');
-	    }
-	    try {
-	        module.exports = JSON.parse(stripBOM(content));
-	    } catch (err) {
-	        err.message = filename + ': ' + err.message;
-	        throw err;
-	    }
-	};
+// Native extension for .json
+Module._extensions['.json'] = function (module, filename) {
+    var content = "";
+    if (filename.startsWith(virualPath)) {
+        content = getPakFile(filename);
+    } else {
+        content = fs.readFileSync(filename, 'utf8');
+    }
+    try {
+        module.exports = JSON.parse(stripBOM(content));
+    } catch (err) {
+        err.message = filename + ': ' + err.message;
+        throw err;
+    }
+};
 
+//增加入口require方法
+//如果bool为真 表示从虚拟路径查找
+Module.require = function (request,bool) {
+    request=bool?request.replace("./", "./virualPath/"):request;
+    return Module._load(request);
+}
 ```
 
 ## 修改完成
 
 加载虚拟路径下的js文件
-`NativeModule.require("module").require("./virualPath/appjs/test");`
+`NativeModule.require("module").require("./appjs/test");`
 
 测试运行良好
-
