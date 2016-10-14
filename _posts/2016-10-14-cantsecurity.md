@@ -11,6 +11,7 @@ photoUrl:
 ## 问题描述
 
 昨天访问钉钉文档的时候,chrome 显示您的连接不是私密连接，手机访问却没有问题，别人电脑也没有问题。
+
 * 重启浏览器 无效
 * 重启路由器 无效
 * 导出证书再导入 无效
@@ -18,6 +19,7 @@ photoUrl:
 ## 解决
 
 查看了证书路径
+
 * GlobalSign
 	+ GlobalSign Organization Validation CA - SHA256 - G2 
 		* *.dingtalk.com
