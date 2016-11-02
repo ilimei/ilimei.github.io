@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"settings":{
+		"font_size": 13
+	},
+	"build_systems":[
+		{
+            "name": "List",
+            "working_dir": "${project_path:${folder}}",
+            "shell_cmd": "node build.js"
+        }
+	]
+}
