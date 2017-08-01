@@ -6,6 +6,7 @@ keywords: centos docker docker-compose
 desc: centos安装docker
 photoUrl:
 ---
+
 ## 安装docker
 1. 拥有root权限的用户。
 * 确保linux内核版本是3.10以上并且是64位的centos版本。如果不能满足这个前提，建议看官绕道走吧。
