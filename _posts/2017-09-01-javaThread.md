@@ -202,7 +202,7 @@ public static void awakeThread() throws InterruptedException {
                 long startTime=System.currentTimeMillis();
                 try {
                     synchronized (lock) {
-                        lock.wait(20000);//Thread.sleep(20000) thread.join()
+                        lock.wait(20000);//Thread.sleep(20000) thread.join() lock.wait();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
