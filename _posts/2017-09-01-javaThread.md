@@ -129,7 +129,7 @@ public static void diedLock(){
 ```
 ## java线程的状态
 
-![状态转换图](/images/ba.png)
+![状态转换图](/images/20170901171737.png)
 
 * NEW 新建状态 
    new 之后 start之前 都是属于NEW状态，一旦状态变成其他 则不会再回到NEW状态
