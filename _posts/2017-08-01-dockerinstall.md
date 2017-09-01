@@ -17,12 +17,12 @@ $ uname -r
 ```
 
 
-1. 升级yum安装包，确保都是最新的版本
+3. 升级yum安装包，确保都是最新的版本
 ```
 $ sudo yum update
 ```
 
-* 在yum repository增加docker的repository
+4. 在yum repository增加docker的repository
 ```
       $  sudo vim /etc/yum.repos.d/docker.repo
 
@@ -36,17 +36,17 @@ $ sudo yum update
       gpgkey=https://yum.dockerproject.org/gpg
 ```
 
-* 安装docker-engine
+5. 安装docker-engine
 ```
       $  sudo yum install docker-engine
 ```
 
-* 安装docker-engine完成后，启动docker服务
+6. 安装docker-engine完成后，启动docker服务
 ```	
       sudo systemctl start docker.service
 ```
 
-*  测试docker服务是否成功
+7.  测试docker服务是否成功
 ```
 	   $ docker --version
 ```
@@ -58,22 +58,22 @@ $ sudo yum update
       $   yum -y install epel-release
 ```
 
-* 安装pip
+2. 安装pip
 ```
  $   yum -y install python-pip
 ```
 
-* 更新pip
+3. 更新pip
 ```
  $   pip install --upgrade pip
 ```
 
-* 安装docker-compose
+4. 安装docker-compose
 ```
  $   pip install docker-compose
 ```
 
-* 查看docker-compose版本信息
+5. 查看docker-compose版本信息
 ```
  $   docker-compose --version
 ```
