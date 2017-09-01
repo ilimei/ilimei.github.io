@@ -138,7 +138,7 @@ public static void diedLock(){
 * WAITING 等待状态
 	wait调用后，睡眠不参与抢锁 等待notify唤醒
 * TIMED_WAITING 等待超时状态
-	当调用wait(long timeout)方法时 线程处于等待状态 超时后并不返回 而是等待获取锁后返回
+	当调用wait(long timeout) Thread.sleep方法时 线程处于等待状态 超时后并不返回 而是等待获取锁后返回
 * TERMINATED 结束状态
     在run方法结束后线程处于结束状态
 
@@ -189,4 +189,29 @@ public static void stateTest() throws InterruptedException {
         }
     }
 
+```
+
+## 唤醒线程
+
+当线程处于TIMED_WAITING状态的时候 可以调用interrupt唤醒它
+```java
+public static void awakeThread() throws InterruptedException {
+        Thread t=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long startTime=System.currentTimeMillis();
+                try {
+                    synchronized (lock) {
+                        lock.wait(20000);//Thread.sleep(20000) thread.join()
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                console.info("唤醒成功！"+(System.currentTimeMillis()-startTime)+"s");
+            }
+        });
+        t.start();
+        Thread.sleep(100);
+        t.interrupt();
+    }
 ```
