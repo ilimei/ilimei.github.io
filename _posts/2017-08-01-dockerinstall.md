@@ -1,5 +1,4 @@
 ---
----
 layout: post
 title: centos安装docker
 keywords: centos docker docker-compose
