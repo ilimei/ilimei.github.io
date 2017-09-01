@@ -44,7 +44,7 @@ services:
 1. 每台机器编写一样的host
 ```
 vim /etc/hosts
-
+# hosts内容追加
 10.2.4.201 gfs1
 10.2.4.202 gfs2
 
@@ -98,11 +98,10 @@ mount -t glusterfs gfs1:gfs /home/share
 ```
 
 5. 测试
-```
+```shell
 ## 在201执行
 cd /home/share
 echo hello glusterfs > 1.txt
-
 ## 到202执行
 cd /home/share
 ## 可以看到201创建的文件 证明集群成功
