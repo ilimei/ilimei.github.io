@@ -48,3 +48,20 @@ docker node ls
 可以看见其他机器证明正确
 
 集群搭建完成
+
+## 配置下载镜像或者代理
+docker pull国内加速镜像
+```shell
+vim /usr/lib/systemd/system/docker.service
+
+## 如果机器通过代理上网的话
+[Service]
+Environment="HTTP_PROXY=http://172.20.109.77:3128/" 
+ExecStart=/usr/bin/dockerd   -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock -H tcp://0.0.0.0:7654  --registry-mirror=https://l1uaai20.mirror.aliyuncs.com
+
+## 保存退出
+# 重启docker
+systemctl daemon-reload
+service docker restart
+```
+
